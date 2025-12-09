@@ -143,18 +143,6 @@ INSERT INTO category (category_id, name, description) VALUES
 (3, 'Desserts', 'End your meal on a sweet note with our desserts'),
 (4, 'Beverages', 'Refresh yourself with our selection of beverages');
 
-INSERT INTO inventory (inventory_item_id, name, unit, current_quantity, reorder_level) VALUES
-(121, 'Chicken Breast', 'kg', 50.00, 10.00),
-(256, 'Lettuce', 'kg', 20.00, 5.00),
-(389, 'Tortilla Wraps', 'pieces', 100.00, 20.00),
-(412, 'Spicy Ranch Sauce', 'liters', 15.00, 3.00);
-
-INSERT INTO menu_item_ingredient (menu_item_id, inventory_item_id, quantity_per_unit) VALUES
-(5, 121, 0.3),
-(5, 256, 0.1),
-(5, 389, 1),
-(5, 412, 0.05);
-
 INSERT INTO menu (menu_item_id, category_id, name, description, price, is_available) VALUES
 (1, 1, 'Grilled Chicken', 'Juicy grilled chicken served with seasonal vegetables', 12.99, TRUE),
 (2, 1, 'Spicy Chicken Wrap', 'Grilled chicken, pepper jack, spicy ranch sauce', 12.50, TRUE),
@@ -289,6 +277,7 @@ WHERE order_id = 2244;
 
 DELETE
 FROM `order`
+<<<<<<< HEAD
 WHERE order_id = 2244 AND status = 'CANCELLED';
 
 SELECT * FROM `order` WHERE order_id = 2244;
@@ -420,3 +409,6 @@ DELIMITER ;
 
 DELETE FROM menu
 WHERE menu_item_id = 1;
+=======
+WHERE order_id = 2244 AND status = 'CANCELLED';
+>>>>>>> 3024fa9f8829266a77664000b2a9dea2625216be
