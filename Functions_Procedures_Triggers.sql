@@ -65,6 +65,9 @@ DELIMITER ;
 -- Test the procedure
 CALL sp_validate_cancelled_order(1234);
 
+SELECT * FROM `order`
+WHERE order_id = 1234;
+
 -- Triggers
 
 -- 1- Automatically update inventory when an item is ordered
@@ -75,11 +78,13 @@ AFTER INSERT ON order_item
 FOR EACH ROW
 BEGIN
     UPDATE inventory i
-    JOIN menu_item_ingreddient mii ON i.inventory_item_id = mii.inventory_item_id
-    SET i_current_quantity = i.current_quantity - (mii.quantity_per_unit * NEW.quantity)
+    JOIN menu_item_ingredient mii
+        ON i.inventory_item_id = mii.inventory_item_id
+    SET i.current_quantity = i.current_quantity - (mii.quantity_per_unit * NEW.quantity)
     WHERE mii.menu_item_id = NEW.menu_item_id;
 END$$
 DELIMITER ;
+
 
 -- Test the trigger by placing a new order
 INSERT INTO customer (customer_id, first_name, last_name, email, phone, created_at) VALUES
@@ -89,12 +94,14 @@ INSERT INTO address (address_id, customer_id, street, city, postal_code, notes, 
 (2, 2, '456 Maple Street', 'Springfield', '12345', 'Ring the doorbell', TRUE);
 
 INSERT INTO `order` (order_id, customer_id, cashier_id, delivery_address_id, order_datetime, status, payment_method, payment_status, total_amount) VALUES
-(2244, 2, 1, 2, NOW(), 'PENDING', 'CARD', 'UNPAID', 15.49);
+(2456, 2, 1, 2, NOW(), 'PENDING', 'CARD', 'UNPAID', 35.50);
 
 INSERT INTO order_item (order_id, menu_item_id, quantity, unit_price, line_total) VALUES
-(2244, 2, 3, 12.50, 37.50);
+(2456, 2, 3, 12.50, 37.50);
 
 SELECT * FROM inventory;
+
+
 
 -- 2 - Prevent deletion of a menu item that is used in existing orders
 
