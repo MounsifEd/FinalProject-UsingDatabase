@@ -149,6 +149,12 @@ INSERT INTO inventory (inventory_item_id, name, unit, current_quantity, reorder_
 (389, 'Tortilla Wraps', 'pieces', 100.00, 20.00),
 (412, 'Spicy Ranch Sauce', 'liters', 15.00, 3.00);
 
+INSERT INTO menu_item_ingredient (menu_item_id, inventory_item_id, quantity_per_unit) VALUES
+(5, 121, 0.3),
+(5, 256, 0.1),
+(5, 389, 1),
+(5, 412, 0.05);
+
 INSERT INTO menu (menu_item_id, category_id, name, description, price, is_available) VALUES
 (1, 1, 'Grilled Chicken', 'Juicy grilled chicken served with seasonal vegetables', 12.99, TRUE),
 (2, 1, 'Spicy Chicken Wrap', 'Grilled chicken, pepper jack, spicy ranch sauce', 12.50, TRUE),
@@ -387,6 +393,8 @@ INSERT INTO order_item (order_id, menu_item_id, quantity, unit_price, line_total
 (2456, 2, 3, 12.50, 37.50);
 
 SELECT * FROM inventory;
+
+
 
 -- 2 - Prevent deletion of a menu item that is used in existing orders
 
