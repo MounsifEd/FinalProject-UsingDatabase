@@ -360,6 +360,9 @@ DELIMITER ;
 -- Test the procedure
 CALL sp_validate_cancelled_order(1234);
 
+SELECT * FROM `order`
+WHERE order_id = 1234;
+
 -- Triggers
 
 -- 1- Automatically update inventory when an item is ordered
