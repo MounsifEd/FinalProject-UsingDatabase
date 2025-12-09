@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS db_restaurant;
-
+USE db_restaurant;
 CREATE TABLE role (
 	role_id INT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
